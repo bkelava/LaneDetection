@@ -30,11 +30,10 @@ class Root(Tk):
             print("NOTHING UPLOADED!")
 
     def readFile(self, path):
-        self.detectionManager = DetectionManager()
         if "jpg" in path or "jpeg" in path:
-            self.detectionManager.detectFromImage(path)
+            DetectionManager.getInstance().detectFromImage(path)
         elif "mp4" in path or "wav" in path:
-            self.detectionManager.detectFromVideo(path)
+            DetectionManager.getInstance().detectFromVideo(path)
         else:
             print("SOMETHING WENT WRONG!")
 

@@ -6,8 +6,19 @@ from math import atan2, degrees
 
 class DetectionManager():
 
-    def __init__(self):
-        pass
+    __instance = None
+
+    @staticmethod
+    def getInstance():
+        if DetectionManager.__instance == None:
+            __instance = DetectionManager()
+        return DetectionManager()
+
+    #def __init__(self):
+    #    if DetectionManager.__instance != None:
+    #        raise Exception("Singleton class, only one instance allowed!")
+    #    else:
+    #        DetectionManager.__instance = self
 
     def GetAngleOfLineBetweenTwoPoints(self, x1, y1, x2, y2):
         deltaY = y2 - y1;
@@ -94,7 +105,7 @@ class DetectionManager():
     def region_ofinterest(self, img, vertices):
         mask = np.zeros_like(img)
         if len(img.shape) > 2:
-            channel_count = img.shape[2]  # i.e. 3 or 4 depending on your image
+            channel_count = img.shape[2]
             match_mask_color = (255,) * channel_count
         else:
             match_mask_color = 255
